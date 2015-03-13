@@ -5,6 +5,7 @@ import java.lang.annotation.Target;
 import android.R.integer;
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -21,8 +22,12 @@ import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.TextView;
 
-public class MainActivity extends Activity 
-{
+public class MainActivity extends Activity {
+	
+	public void reakcja(){
+		Intent i = new Intent(this, OperationActivity.class);
+		startActivity(i);
+	}
 
 	int total = 0;
 	
@@ -126,8 +131,10 @@ public class MainActivity extends Activity
 				case DragEvent.ACTION_DROP:
 					TextView target = (TextView)v;
 					TextView dragged = (TextView)event.getLocalState();
+					reakcja();
 					String result = MyEquation.Div(dragged.getText(), target.getText());
 					target.setText(result);
+				
 					
 					
 					break;

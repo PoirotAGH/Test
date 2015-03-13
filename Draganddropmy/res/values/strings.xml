@@ -9,5 +9,6 @@
     <string name="but3">3</string>
     <string name="score">0</string>
     <string name="score_label">Your score</string>
+    <string name="title_activity_operation">Draganddropmy</string>
 
 </resources>
