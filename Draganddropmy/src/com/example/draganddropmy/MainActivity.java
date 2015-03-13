@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
-	public void reakcja(){
+	public void reaction(){
 		Intent i = new Intent(this, OperationActivity.class);
 		startActivity(i);
 	}
@@ -39,7 +39,22 @@ public class MainActivity extends Activity {
 		
 		findViewById(R.id.but1).setOnTouchListener(touchListen);
 		findViewById(R.id.but2).setOnTouchListener(touchListen);
+		findViewById(R.id.but3).setOnTouchListener(touchListen);
+		findViewById(R.id.but4).setOnTouchListener(touchListen);
+		findViewById(R.id.but5).setOnTouchListener(touchListen);
+		findViewById(R.id.but6).setOnTouchListener(touchListen);
+		findViewById(R.id.but7).setOnTouchListener(touchListen);
+		findViewById(R.id.but8).setOnTouchListener(touchListen);
+		findViewById(R.id.but9).setOnTouchListener(touchListen);
+		findViewById(R.id.but1).setOnDragListener(DropListener);
+		findViewById(R.id.but2).setOnDragListener(DropListener);
 		findViewById(R.id.but3).setOnDragListener(DropListener);
+		findViewById(R.id.but4).setOnDragListener(DropListener);
+		findViewById(R.id.but5).setOnDragListener(DropListener);
+		findViewById(R.id.but6).setOnDragListener(DropListener);
+		findViewById(R.id.but7).setOnDragListener(DropListener);
+		findViewById(R.id.but8).setOnDragListener(DropListener);
+		findViewById(R.id.but9).setOnDragListener(DropListener);
 	}
 
 	@Override
@@ -131,10 +146,9 @@ public class MainActivity extends Activity {
 				case DragEvent.ACTION_DROP:
 					TextView target = (TextView)v;
 					TextView dragged = (TextView)event.getLocalState();
-					reakcja();
-					String result = MyEquation.Div(dragged.getText(), target.getText());
+					reaction();
+					String result = MyEquation.Sum(dragged.getText(), target.getText());
 					target.setText(result);
-				
 					
 					
 					break;

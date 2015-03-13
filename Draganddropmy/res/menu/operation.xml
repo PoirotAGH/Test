@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.draganddropmy.DzialaniaActivity" >
+    tools:context="com.example.draganddropmy.OperationActivity" >
 
     <item
         android:id="@+id/action_settings"
