@@ -12,9 +12,6 @@ import android.widget.Button;
 
 public class OperationActivity extends Activity {
 	
-	public void reaction(){
-		//po nacisnieciu przycisku
-	};
 	
 	Button b1, b2, b3, b4;
 	
@@ -27,17 +24,47 @@ public class OperationActivity extends Activity {
 		b2=(Button) findViewById(R.id.button2);
 		b3=(Button) findViewById(R.id.button3);
 		b4=(Button) findViewById(R.id.button4);
-		OnClickListener l = new OnClickListener() {
-			@Override
-			public void onClick(View v){
-				reaction();
-				
-			}
-		};
- 		b1.setOnClickListener(l);
- 		b2.setOnClickListener(l);
- 		b3.setOnClickListener(l);
- 		b4.setOnClickListener(l);
+		b1.setOnClickListener(new OnClickListener() {  
+              @Override  
+              public void onClick(View arg0) {  
+                  String message="sum";  
+                  Intent intent=new Intent();  
+                  intent.putExtra("MESSAGE",message);  
+                  setResult(2,intent);  
+                  finish();//finishing activity  
+              }  
+          }); 
+		b2.setOnClickListener(new OnClickListener() {  
+            @Override  
+            public void onClick(View arg0) {  
+                String message="dif";  
+                Intent intent=new Intent();  
+                intent.putExtra("MESSAGE",message);  
+                setResult(2,intent);  
+                finish();//finishing activity  
+            }  
+        }); 
+		b3.setOnClickListener(new OnClickListener() {  
+            @Override  
+            public void onClick(View arg0) {  
+                String message="mult";  
+                Intent intent=new Intent();  
+                intent.putExtra("MESSAGE",message);  
+                setResult(2,intent);  
+                finish();//finishing activity  
+            }  
+        }); 
+		b4.setOnClickListener(new OnClickListener() {  
+            @Override  
+            public void onClick(View arg0) {  
+                String message="div";  
+                Intent intent=new Intent();  
+                intent.putExtra("MESSAGE",message);  
+                setResult(2,intent);  
+                finish();//finishing activity  
+            }  
+        }); 
+ 		
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.example.draganddropmy;
 
 import java.lang.annotation.Target;
+import java.util.concurrent.Semaphore;
 
 import android.R.integer;
 import android.app.Activity;
@@ -17,25 +18,79 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnDragListener;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	public void reaction(){
-		Intent i = new Intent(this, OperationActivity.class);
-		startActivity(i);
-	}
-	
+
+
 	int total = 0;
+	int res = 0;
+	Semaphore mutex = new Semaphore(1); 
+	Object target = new Object();
+	Object dragged = new Object();
+	Object bout = new Object();
+	Button Play, Options, Credits, Exit;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		Play=(Button) findViewById(R.id.button1);
+		Options=(Button) findViewById(R.id.button2);
+		Credits=(Button) findViewById(R.id.button3);
+		Exit=(Button) findViewById(R.id.button4);
+		
+		OnClickListener l = new OnClickListener(){
+			@Override
+			public void onClick(View arg0 ){
+				//do play
+				try {
+					this.finalize();
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				};
+				//this.finish();
+			
+		};
+		Play.setOnClickListener(l);
+		
+		Options.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v ){
+				//do option
+			}
+		});
+		
+		Credits.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v ){
+				//do credit
+				Toast.makeText(getApplicationContext(),"Kto robi³,\n ten zrobi³", Toast.LENGTH_LONG).show();
+			}
+		});
+		
+		Exit.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v ){
+				//do exit
+				System.exit(0);
+			}
+		});
 		
 		findViewById(R.id.but1).setOnTouchListener(touchListen);
 		findViewById(R.id.but2).setOnTouchListener(touchListen);
@@ -61,7 +116,7 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) 
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.layout.activity_first_menu, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -77,6 +132,56 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	 protected void onActivityResult(int requestCode, int resultCode, Intent data)  
+    {  
+              super.onActivityResult(requestCode, resultCode, data);  
+               // check if the request code is same as what is passed  here it is 2  
+                if(requestCode==2)  
+                      {  
+                         String message=data.getStringExtra("MESSAGE");
+                         String s1 = "sum";
+                         String s2 = "dif";
+                         String s3 = "mult";
+                         String s4 = "div";		 
+                         if (message.equals(s1))
+                       	     res = 1; 
+                         else if (message.equals(s2))
+                             res = 2;
+                         else if (message.equals(s3))
+                       	     res = 3;
+                         else if (message.equals(s4))
+                             res = 4;
+                         else {
+                        	 Log.i("Nie ma", "Mnie");
+						}
+                         
+                      } 
+                String result = new String();
+                TextView target2 = (TextView)target;
+                TextView dragged2 = (TextView)dragged;
+                Log.i("Pocz¹tek", "Obliczeñ");
+        		switch(res){
+        			case 1: 
+        				Log.i("Suma", "Obliczone");
+        				result = MyEquation.Sum(dragged2.getText(), target2.getText());
+        			break;
+        			case 2: result = MyEquation.Diff(dragged2.getText(), target2.getText());
+        			break;
+        			case 3: result = MyEquation.Mult(dragged2.getText(), target2.getText());
+        			break;
+        			case 4: result = MyEquation.Div(dragged2.getText(), target2.getText());
+        		    break;
+        			default:
+        		    	break;
+        		}
+        		target2.setText(result);
+        		target = (Object)target2;
+        		Button submit = (Button) bout;
+        		submit.setEnabled(false);
+                
+  } 
 	OnTouchListener touchListen = new OnTouchListener()
 	{
 
@@ -144,11 +249,16 @@ public class MainActivity extends Activity {
 					Log.i("Drag Event", "Exited");
 					break;
 				case DragEvent.ACTION_DROP:
-					TextView target = (TextView)v;
-					TextView dragged = (TextView)event.getLocalState();
+					
+					target = (TextView)v;
+					dragged = (TextView)event.getLocalState();
+					bout = (Button)event.getLocalState();
 					reaction();
-					String result = MyEquation.Sum(dragged.getText(), target.getText());
-					target.setText(result);
+				
+					
+					//ViewGroup layout = (ViewGroup) bout.getParent();
+					//if(null!=layout) //for safety only  as you are doing onClick
+					//	  layout.removeView(bout);
 					
 					
 					break;
@@ -159,5 +269,11 @@ public class MainActivity extends Activity {
 		}
 		
 	};
+	public void reaction(){
+		Intent i = new Intent(this, OperationActivity.class);
+		startActivityForResult(i,2); 
+	}
+	
+	
 	
 }
