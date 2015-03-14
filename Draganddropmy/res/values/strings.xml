@@ -16,5 +16,10 @@
     <string name="but8">8</string>
     <string name="but9">9</string>
     <string name="title_activity_operation">Draganddropmy</string>
+    <string name="time_label">Time</string>
+    <string name="count_sum">0</string>
+    <string name="count_diff">0</string>
+    <string name="count_multi">0</string>
+    <string name="count_div">0</string>
 
 </resources>
