@@ -7,25 +7,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class First_menuActivity extends Activity {
 	
 	Button Play, Options, Credits, Exit;
 	
-	
-	
-	
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_first_menu);
-		
-		
-			
-		
-		
+	
 		Play=(Button) findViewById(R.id.button1);
 		Options=(Button) findViewById(R.id.button2);
 		Credits=(Button) findViewById(R.id.button3);
@@ -60,6 +52,7 @@ public class First_menuActivity extends Activity {
 			@Override
 			public void onClick(View v ){
 				//do credit
+				Toast.makeText(getApplicationContext(),"Kto robi³,\n ten zrobi³", Toast.LENGTH_LONG).show();
 			}
 		});
 		
