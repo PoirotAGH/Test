@@ -3,6 +3,8 @@ package com.example.draganddropmy;
 import java.lang.annotation.Target;
 import java.util.concurrent.Semaphore;
 
+
+
 import android.R.integer;
 import android.app.Activity;
 import android.content.ClipData;
@@ -78,8 +80,17 @@ public class MainActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.action_settings0) {
+			Log.d("Klik!","Continue");
+			return super.onOptionsItemSelected(item);
+		}
+		else if (id == R.id.action_settings1) {
+			Log.d("Klik!","Restart");
+			setContentView(R.layout.activity_main);
+		}
+		else if (id == R.id.action_settings2) {
+			Log.d("Klik!","Exit");
+			System.exit(0);
 		}
 		return super.onOptionsItemSelected(item);
 	}
