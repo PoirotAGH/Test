@@ -16,5 +16,6 @@
     <string name="but8">8</string>
     <string name="but9">9</string>
     <string name="title_activity_operation">Draganddropmy</string>
+    <string name="title_activity_first_menu">First_menuActivity</string>
 
 </resources>

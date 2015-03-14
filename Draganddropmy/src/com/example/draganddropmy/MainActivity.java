@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 		Intent i = new Intent(this, OperationActivity.class);
 		startActivity(i);
 	}
-
+	
 	int total = 0;
 	
 	@Override
